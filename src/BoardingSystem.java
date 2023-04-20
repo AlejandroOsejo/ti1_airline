@@ -26,7 +26,8 @@ public class BoardingSystem {
                 boolean isFirstClass = Boolean.parseBoolean(infoPassanger[3].trim());
                 int row = Integer.parseInt(infoPassanger[4].trim());
                 char seat = infoPassanger[5].trim().charAt(0);
-                Passanger passanger = new Passanger(id, name, age, isFirstClass, row, seat);
+                boolean isSpecialAttention = Boolean.parseBoolean(infoPassanger[6].trim());
+                Passanger passanger = new Passanger(id, name, age, isFirstClass, row, seat, isSpecialAttention);
                 passangers.put(id, passanger);
             }
             reader.close();

@@ -7,8 +7,9 @@ public class Passanger implements Comparable<Passanger> {
     private char seat;
     private int priority;
     private boolean inBoardingRoom;
+    private boolean isSpecialAttention;
 
-    public Passanger(int id, String name, int age, boolean isFirstClass, int row, char seat) {
+    public Passanger(int id, String name, int age, boolean isFirstClass, int row, char seat, boolean isSpecialAttention) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -16,7 +17,11 @@ public class Passanger implements Comparable<Passanger> {
         this.row = row;
         this.seat = seat;
         this.inBoardingRoom = false;
+        this.isSpecialAttention = isSpecialAttention;
     }
+    public boolean isSpecialAttention() {return isSpecialAttention;}
+
+    public void setSpecialAttention(boolean specialAttention) {isSpecialAttention = specialAttention;}
 
     public int getId() {
         return id;

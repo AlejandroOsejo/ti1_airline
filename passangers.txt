@@ -1,4 +1,4 @@
 3
-1,John Doe,24,false,10,A
-2,Mary Smith,30,true,5,D
-3,Mike Smith,36,true,5,E
+1,John Doe,24,false,10,A,true
+2,Mary Smith,30,true,5,D,false
+3,Mike Smith,36,true,5,E,true
