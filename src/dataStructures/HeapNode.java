@@ -1,10 +1,10 @@
 package dataStructures;
 
-public class HNode<K, V> {
+public class HeapNode<K extends Comparable<K>, V> implements Comparable<HeapNode<K, V>> {
     private K key;
     private V value;
 
-    public HNode(K key, V value) {
+    public HeapNode(K key, V value) {
         this.key = key;
         this.value = value;
     }
@@ -17,11 +17,16 @@ public class HNode<K, V> {
         return value;
     }
 
+    public void setKey(K key) {
+        this.key = key;
+    }
+
     public void setValue(V value) {
         this.value = value;
     }
 
-    public String toString() {
-        return key.toString() + " - " + value.toString();
+    @Override
+    public int compareTo(HeapNode<K, V> o) {
+        return this.key.compareTo(o.getKey());
     }
 }

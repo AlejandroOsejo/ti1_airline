@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class HashTable<K, V> {
     private int size;
-    private ArrayList<HNode<K, V>> table;
+    private ArrayList<HashNode<K, V>> table;
 
     public HashTable(int size) {
         this.size = size;
         // this.table = new HNode[size];
-        this.table = new ArrayList<HNode<K, V>>(size);
+        this.table = new ArrayList<HashNode<K, V>>(size);
         for (int i = 0; i < size; i++) {
             table.add(null);
         }
@@ -28,7 +28,7 @@ public class HashTable<K, V> {
         while (table.get(hash) != null && !table.get(hash).getKey().equals(key)) {
             hash = (hash + 1) % size;
         }
-        table.set(hash, new HNode<K, V>(key, value));
+        table.set(hash, new HashNode<K, V>(key, value));
     }
 
     public V get(K key) {
