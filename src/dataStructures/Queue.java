@@ -36,8 +36,12 @@ public class Queue<T> {
         return queue[0];
     }
 
-    private boolean isEmpty() {
+    public boolean isEmpty() {
         return size == 0;
+    }
+
+    public int size() {
+        return size;
     }
 
     public String toString() {

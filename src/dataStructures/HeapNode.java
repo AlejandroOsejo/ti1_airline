@@ -29,4 +29,8 @@ public class HeapNode<K extends Comparable<K>, V> implements Comparable<HeapNode
     public int compareTo(HeapNode<K, V> o) {
         return this.key.compareTo(o.getKey());
     }
+
+    public String toString() {
+        return key + " " + value;
+    }
 }

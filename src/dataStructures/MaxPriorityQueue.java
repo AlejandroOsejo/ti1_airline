@@ -24,7 +24,7 @@ public class MaxPriorityQueue<K extends Comparable<K>, V> {
         return max;
     }
 
-    private void increaseKey(int i, K key, V value) {
+/*    private void increaseKey(int i, K key, V value) {
         if (key.compareTo(heap[i].getKey()) < 0) {
             throw new RuntimeException("New key is smaller than current key");
         }
@@ -34,7 +34,7 @@ public class MaxPriorityQueue<K extends Comparable<K>, V> {
             swap(i, parent(i));
             i = parent(i);
         }
-    }
+    }*/
 
     public void maxInsert(K key, V value) {
         if (size == heap.length) {
@@ -42,7 +42,11 @@ public class MaxPriorityQueue<K extends Comparable<K>, V> {
         }
         size++;
         heap[size - 1] = new HeapNode<>(key, value);
-        increaseKey(size - 1, key, value);
+        int i = size - 1;
+        while (i > 0 && heap[parent(i)].getKey().compareTo(heap[i].getKey()) < 0) {
+            swap(i, parent(i));
+            i = parent(i);
+        }
     }
 
     private int parent(int i) {
@@ -69,5 +73,13 @@ public class MaxPriorityQueue<K extends Comparable<K>, V> {
             swap(i, largest);
             maxHeapify(largest);
         }
+    }
+
+    public String toString() {
+        String s = "";
+        for (int i = 0; i < size; i++) {
+            s += heap[i].toString() + "\n";
+        }
+        return s;
     }
 }

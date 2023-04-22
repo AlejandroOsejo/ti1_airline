@@ -1,4 +1,6 @@
-3
-1,John Doe,24,false,10,A,true
-2,Mary Smith,30,true,5,D,false
-3,Mike Smith,36,true,5,E,true
+20
+4
+1,John Doe,24,10,A,false,0,false
+2,Mary Smith,30,5,D,false,1000,false
+3,Mike Smith,68,5,E,true,10000,true
+4,Walter White,50,20,A,true,0,true
