@@ -78,6 +78,22 @@ public class Passenger {
         this.seat = seat;
     }
 
+    public int getAccumulatedMiles() {
+        return accumulatedMiles;
+    }
+
+    public void setAccumulatedMiles(int accumulatedMiles) {
+        this.accumulatedMiles = accumulatedMiles;
+    }
+
+    public boolean isSpecialAttention() {
+        return isSpecialAttention;
+    }
+
+    public void setSpecialAttention(boolean specialAttention) {
+        isSpecialAttention = specialAttention;
+    }
+
     public int getPriority() {
         return priority;
     }

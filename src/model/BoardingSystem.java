@@ -45,8 +45,8 @@ public class BoardingSystem {
         }
     }
 
-    public String getPassenger(String id) {
-        return passengers.get(id).toString();
+    public Passenger getPassenger(String id) {
+        return passengers.get(id);
     }
 
 

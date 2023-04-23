@@ -3,15 +3,19 @@ package ui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.BoardingSystem;
+import model.Passenger;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,12 +48,41 @@ public class BoardingGUI {
     @FXML
     private Button btnViewExit;
 
+    @FXML
+    private Pane viewPane;
+
     // Search Pane
     @FXML
     private Button btnSearchPassenger;
 
     @FXML
     private TextField tfPassengerId;
+
+    @FXML
+    private Button btnCheckIn;
+
+    // View Passenger Info Pane
+    @FXML
+    private Label lbAge;
+
+    @FXML
+    private Label lbId;
+
+    @FXML
+    private Label lbIsFirstClass;
+
+    @FXML
+    private Label lbMiles;
+
+    @FXML
+    private Label lbName;
+
+    @FXML
+    private Label lbNeedSpecialAtte;
+
+    @FXML
+    private Label lbSeat;
+
 
     private boolean isTestMode;
 
@@ -159,6 +192,43 @@ public class BoardingGUI {
         stage.show();
 
         System.out.println("Search");
+    }
+
+    @FXML
+    private void handleSearchPassenger() throws IOException {
+        String passengerId = tfPassengerId.getText();
+        Passenger passenger = boardingSystem.getPassenger(passengerId);
+
+        if (passenger != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("passengerInfo.fxml"));
+            loader.setController(this);
+            Node root = loader.load();
+
+            viewPane.getChildren().clear();
+            viewPane.getChildren().add(root);
+
+            Stage stage = (Stage) btnSearchPassenger.getScene().getWindow();
+            stage.close();
+
+            lbName.setText(passenger.getName());
+            lbId.setText(passenger.getId());
+            lbAge.setText(passenger.getAge() + " years old");
+            lbSeat.setText(passenger.getRow() + " " + passenger.getSeat());
+            lbIsFirstClass.setText(passenger.isFirstClass()? "Yes" : "No");
+            lbMiles.setText(passenger.getAccumulatedMiles() + "");
+            lbNeedSpecialAtte.setText(passenger.isSpecialAttention()? "Yes" : "No");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Passenger not found");
+            alert.setContentText("The passenger with the ID " + passengerId + " was not found");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void handleCheckIn() {
+        System.out.println("Check In");
     }
 
     @FXML
