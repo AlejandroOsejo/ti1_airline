@@ -54,6 +54,20 @@ public class BoardingSystem {
         arrivalQueue.enqueue(id);
     }
 
+    public void addToArrivalQueueTest(String filename) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(filename));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String id = reader.readLine();
+                arrivalQueue.enqueue(id);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setPriorityEntrance() {
         while (!arrivalQueue.isEmpty()) {
             int arrivalNum = arrivalQueue.size();

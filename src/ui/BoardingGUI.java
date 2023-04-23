@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
@@ -29,6 +30,9 @@ public class BoardingGUI {
     // Main Pane
     @FXML
     private Button btnLoad;
+
+    @FXML
+    private Button btnLoadArrivalList;
 
     @FXML
     private Button btnSearch;
@@ -62,6 +66,7 @@ public class BoardingGUI {
         Stage stage2 = (Stage) btnNormal.getScene().getWindow();
         stage2.close();
 
+        btnLoadArrivalList.setVisible(false);
         btnSearch.setDisable(true);
         btnViewBoarding.setDisable(true);
         btnViewExit.setDisable(true);
@@ -81,7 +86,7 @@ public class BoardingGUI {
         stage2.close();
 
         isTestMode = true;
-
+        btnLoadArrivalList.setVisible(true);
         btnSearch.setDisable(true);
         btnViewBoarding.setDisable(true);
         btnViewExit.setDisable(true);
@@ -91,16 +96,47 @@ public class BoardingGUI {
     private void handleLoad() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
-        File file = fileChooser.showOpenDialog(null);
+        File listPassangers = fileChooser.showOpenDialog(null);
 
-        if (file != null) {
-            System.out.println(file.getPath());
-            boardingSystem.loadPassengers(file.getPath());
+        boolean isValid = listPassangers.getName().endsWith(".txt");
+        if (isValid) {
+            System.out.println(listPassangers.getPath());
+            boardingSystem.loadPassengers(listPassangers.getPath());
             System.out.println("Load");
 
             btnSearch.setDisable(false);
             btnViewBoarding.setDisable(false);
             btnViewExit.setDisable(false);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid file");
+            alert.setContentText("The file must be a .txt file");
+            alert.showAndWait();
+
+            System.out.println("Invalid file");
+        }
+    }
+
+    @FXML
+    private void handleLoadArrival() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        File arrivalPassangers = fileChooser.showOpenDialog(null);
+
+        boolean isValid = arrivalPassangers.getName().endsWith(".txt");
+        if (isValid) {
+            System.out.println(arrivalPassangers.getPath());
+            boardingSystem.addToArrivalQueueTest(arrivalPassangers.getPath());
+            System.out.println("Load Test");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid file");
+            alert.setContentText("The file must be a .txt file");
+            alert.showAndWait();
+
+            System.out.println("Invalid file");
         }
     }
 

@@ -14,7 +14,7 @@
    <left>
       <VBox alignment="BASELINE_CENTER" prefHeight="800.0" prefWidth="230.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#handleSearch" prefHeight="44.0" prefWidth="195.0" style="-fx-background-color: #36a1ff;" text="Search Passanger" textFill="WHITE">
+            <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#handleSearch" prefHeight="44.0" prefWidth="195.0" style="-fx-background-color: #36a1ff;" text="Search passanger" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -38,12 +38,23 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnLoad" mnemonicParsing="false" onAction="#handleLoad" prefHeight="44.0" prefWidth="195.0" style="-fx-background-color: #238636;" text="Load Passangers" textFill="WHITE">
+            <Button fx:id="btnLoadArrivalList" mnemonicParsing="false" onAction="#handleLoadArrival" prefHeight="44.0" prefWidth="195.0" style="-fx-background-color: #238636;" text="Load arrival list" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <VBox.margin>
+                  <Insets top="450.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnLoad" mnemonicParsing="false" onAction="#handleLoad" prefHeight="44.0" prefWidth="195.0" style="-fx-background-color: #238636;" text="Load passangers" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets top="515.0" />
+                  <Insets />
                </VBox.margin>
                <cursor>
                   <Cursor fx:constant="HAND" />
