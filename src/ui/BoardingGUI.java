@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -42,6 +43,13 @@ public class BoardingGUI {
 
     @FXML
     private Button btnViewExit;
+
+    // Search Pane
+    @FXML
+    private Button btnSearchPassenger;
+
+    @FXML
+    private TextField tfPassengerId;
 
     private boolean isTestMode;
 
@@ -96,12 +104,12 @@ public class BoardingGUI {
     private void handleLoad() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
-        File listPassangers = fileChooser.showOpenDialog(null);
+        File listPassengers = fileChooser.showOpenDialog(null);
 
-        boolean isValid = listPassangers.getName().endsWith(".txt");
+        boolean isValid = listPassengers.getName().endsWith(".txt");
         if (isValid) {
-            System.out.println(listPassangers.getPath());
-            boardingSystem.loadPassengers(listPassangers.getPath());
+            System.out.println(listPassengers.getPath());
+            boardingSystem.loadPassengers(listPassengers.getPath());
             System.out.println("Load");
 
             btnSearch.setDisable(false);
@@ -122,12 +130,12 @@ public class BoardingGUI {
     private void handleLoadArrival() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
-        File arrivalPassangers = fileChooser.showOpenDialog(null);
+        File arrivalPassengers = fileChooser.showOpenDialog(null);
 
-        boolean isValid = arrivalPassangers.getName().endsWith(".txt");
+        boolean isValid = arrivalPassengers.getName().endsWith(".txt");
         if (isValid) {
-            System.out.println(arrivalPassangers.getPath());
-            boardingSystem.addToArrivalQueueTest(arrivalPassangers.getPath());
+            System.out.println(arrivalPassengers.getPath());
+            boardingSystem.addToArrivalQueueTest(arrivalPassengers.getPath());
             System.out.println("Load Test");
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -141,7 +149,15 @@ public class BoardingGUI {
     }
 
     @FXML
-    private void handleSearch() {
+    private void handleSearch() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Search.fxml"));
+        loader.setController(this);
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Search");
+        stage.show();
+
         System.out.println("Search");
     }
 

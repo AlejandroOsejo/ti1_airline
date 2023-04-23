@@ -14,7 +14,7 @@
    <left>
       <VBox alignment="BASELINE_CENTER" prefHeight="800.0" prefWidth="230.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#handleSearch" prefHeight="44.0" prefWidth="195.0" style="-fx-background-color: #36a1ff;" text="Search passanger" textFill="WHITE">
+            <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#handleSearch" prefHeight="44.0" prefWidth="195.0" style="-fx-background-color: #36a1ff;" text="Search passenger" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -49,7 +49,7 @@
                   <Insets top="450.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btnLoad" mnemonicParsing="false" onAction="#handleLoad" prefHeight="44.0" prefWidth="195.0" style="-fx-background-color: #238636;" text="Load passangers" textFill="WHITE">
+            <Button fx:id="btnLoad" mnemonicParsing="false" onAction="#handleLoad" prefHeight="44.0" prefWidth="195.0" style="-fx-background-color: #238636;" text="Load passengers" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

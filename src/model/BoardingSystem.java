@@ -7,7 +7,7 @@ import dataStructures.Queue;
 import java.io.*;
 
 public class BoardingSystem {
-    private HashTable<String, Passanger> passangers;
+    private HashTable<String, Passenger> passengers;
     private Queue<String> arrivalQueue;
     private MaxPriorityQueue<Integer, String> boardingQueue;
     private int rows;
@@ -21,23 +21,23 @@ public class BoardingSystem {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
             String line;
             this.rows = Integer.parseInt(reader.readLine());
-            int numPassangers = Integer.parseInt(reader.readLine());
-            passangers = new HashTable<>(numPassangers);
+            int numPassengers = Integer.parseInt(reader.readLine());
+            passengers = new HashTable<>(numPassengers);
             while ((line = reader.readLine()) != null) {
-                String[] infoPassanger = line.split(",");
-                String id = infoPassanger[0].trim();
-                String name = infoPassanger[1].trim();
-                int age = Integer.parseInt(infoPassanger[2].trim());
-                int row = Integer.parseInt(infoPassanger[3].trim());
-                char seat = infoPassanger[4].trim().charAt(0);
-                boolean isFirstClass = Boolean.parseBoolean(infoPassanger[5].trim());
-                int accumulatedMiles = Integer.parseInt(infoPassanger[6].trim());
-                boolean isSpecialAttention = Boolean.parseBoolean(infoPassanger[7].trim());
-                Passanger passanger = new Passanger(id, name, age, row, seat, isFirstClass, accumulatedMiles, isSpecialAttention);
-                passangers.put(id, passanger);
+                String[] infoPassenger = line.split(",");
+                String id = infoPassenger[0].trim();
+                String name = infoPassenger[1].trim();
+                int age = Integer.parseInt(infoPassenger[2].trim());
+                int row = Integer.parseInt(infoPassenger[3].trim());
+                char seat = infoPassenger[4].trim().charAt(0);
+                boolean isFirstClass = Boolean.parseBoolean(infoPassenger[5].trim());
+                int accumulatedMiles = Integer.parseInt(infoPassenger[6].trim());
+                boolean isSpecialAttention = Boolean.parseBoolean(infoPassenger[7].trim());
+                Passenger passenger = new Passenger(id, name, age, row, seat, isFirstClass, accumulatedMiles, isSpecialAttention);
+                passengers.put(id, passenger);
 
-                arrivalQueue = new Queue<>(passangers.size());
-                boardingQueue = new MaxPriorityQueue<>(passangers.size());
+                arrivalQueue = new Queue<>(passengers.size());
+                boardingQueue = new MaxPriorityQueue<>(passengers.size());
             }
             reader.close();
         } catch (IOException e) {
@@ -46,7 +46,7 @@ public class BoardingSystem {
     }
 
     public String getPassenger(String id) {
-        return passangers.get(id).toString();
+        return passengers.get(id).toString();
     }
 
 
@@ -72,14 +72,14 @@ public class BoardingSystem {
         while (!arrivalQueue.isEmpty()) {
             int arrivalNum = arrivalQueue.size();
             String id = arrivalQueue.dequeue();
-            Passanger passanger = passangers.get(id);
-            passanger.setPriority(arrivalNum, rows);
-            boardingQueue.maxInsert(passanger.getPriority(), id);
+            Passenger passenger = passengers.get(id);
+            passenger.setPriority(arrivalNum, rows);
+            boardingQueue.maxInsert(passenger.getPriority(), id);
         }
     }
 
     public void printPassengers() {
-        System.out.println(passangers.toString());
+        System.out.println(passengers.toString());
     }
 
     public void printArrivalQueue() {

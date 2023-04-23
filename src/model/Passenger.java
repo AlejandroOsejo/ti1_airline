@@ -1,6 +1,6 @@
 package model;
 
-public class Passanger {
+public class Passenger {
     private String id;
     private String name;
     private int age;
@@ -12,7 +12,7 @@ public class Passanger {
     private boolean isThirdAge;
     private int priority;
 
-    public Passanger(String id, String name, int age, int row, char seat, boolean isFirstClass, int accumulatedMiles, boolean isSpecialAttention) {
+    public Passenger(String id, String name, int age, int row, char seat, boolean isFirstClass, int accumulatedMiles, boolean isSpecialAttention) {
         this.id = id;
         this.name = name;
         this.age = age;
