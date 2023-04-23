@@ -12,13 +12,11 @@ public class BoardingSystem {
     private MaxPriorityQueue<Integer, String> boardingQueue;
     private int rows;
 
-    public BoardingSystem(String filename) {
-        loadPassengers(filename);
-        arrivalQueue = new Queue<>(passangers.size());
-        boardingQueue = new MaxPriorityQueue<>(passangers.size());
+    public BoardingSystem() {
+
     }
 
-    private void loadPassengers(String filename) {
+    public void loadPassengers(String filename) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
             String line;
@@ -37,6 +35,9 @@ public class BoardingSystem {
                 boolean isSpecialAttention = Boolean.parseBoolean(infoPassanger[7].trim());
                 Passanger passanger = new Passanger(id, name, age, row, seat, isFirstClass, accumulatedMiles, isSpecialAttention);
                 passangers.put(id, passanger);
+
+                arrivalQueue = new Queue<>(passangers.size());
+                boardingQueue = new MaxPriorityQueue<>(passangers.size());
             }
             reader.close();
         } catch (IOException e) {

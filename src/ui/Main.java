@@ -35,7 +35,7 @@ public class Main extends Application {
     }
 
     public Main() {
-        boardingSystem = new BoardingSystem("passangers.txt");
+        boardingSystem = new BoardingSystem();
         boardingGUI = new BoardingGUI(boardingSystem);
     }
 
