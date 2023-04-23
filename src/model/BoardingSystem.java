@@ -5,6 +5,7 @@ import dataStructures.MaxPriorityQueue;
 import dataStructures.Queue;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class BoardingSystem {
     private HashTable<String, Passenger> passengers;
@@ -59,7 +60,7 @@ public class BoardingSystem {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
             String line;
             while ((line = reader.readLine()) != null) {
-                String id = reader.readLine();
+                String id = line.trim();
                 arrivalQueue.enqueue(id);
             }
             reader.close();
@@ -76,6 +77,17 @@ public class BoardingSystem {
             passenger.setPriority(arrivalNum, rows);
             boardingQueue.maxInsert(passenger.getPriority(), id);
         }
+    }
+
+    public ArrayList<Passenger> getBoardingQueue() {
+        ArrayList<Passenger> boardingOrder = new ArrayList<>();
+        while (!boardingQueue.isEmpty()) {
+            String id = boardingQueue.extractMax();
+            Passenger passenger = passengers.get(id);
+            System.out.println(passenger.getName());
+            boardingOrder.add(passenger);
+        }
+        return boardingOrder;
     }
 
     public void printPassengers() {

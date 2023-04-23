@@ -1,15 +1,15 @@
 package ui;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
@@ -82,6 +82,19 @@ public class BoardingGUI {
 
     @FXML
     private Label lbSeat;
+
+    // Passengers List
+    @FXML
+    private TableColumn<Passenger, String> tcName;
+
+    @FXML
+    private TableColumn<Passenger, String> tcSeat;
+
+    @FXML
+    private TableColumn<Passenger, String> tcRow;
+
+    @FXML
+    private TableView<Passenger> tvPassengersList;
 
 
     private boolean isTestMode;
@@ -169,15 +182,12 @@ public class BoardingGUI {
         if (isValid) {
             System.out.println(arrivalPassengers.getPath());
             boardingSystem.addToArrivalQueueTest(arrivalPassengers.getPath());
-            System.out.println("Load Test");
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Invalid file");
             alert.setContentText("The file must be a .txt file");
             alert.showAndWait();
-
-            System.out.println("Invalid file");
         }
     }
 
@@ -190,8 +200,6 @@ public class BoardingGUI {
         stage.setScene(new Scene(root));
         stage.setTitle("Search");
         stage.show();
-
-        System.out.println("Search");
     }
 
     @FXML
@@ -214,9 +222,9 @@ public class BoardingGUI {
             lbId.setText(passenger.getId());
             lbAge.setText(passenger.getAge() + " years old");
             lbSeat.setText(passenger.getRow() + " " + passenger.getSeat());
-            lbIsFirstClass.setText(passenger.isFirstClass()? "Yes" : "No");
+            lbIsFirstClass.setText(passenger.isFirstClass() ? "Yes" : "No");
             lbMiles.setText(passenger.getAccumulatedMiles() + "");
-            lbNeedSpecialAtte.setText(passenger.isSpecialAttention()? "Yes" : "No");
+            lbNeedSpecialAtte.setText(passenger.isSpecialAttention() ? "Yes" : "No");
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -228,12 +236,31 @@ public class BoardingGUI {
 
     @FXML
     private void handleCheckIn() {
+        String passengerId = tfPassengerId.getText();
+        boardingSystem.addToArrivalQueue(passengerId);
         System.out.println("Check In");
     }
 
     @FXML
-    private void handleViewBoarding() {
-        System.out.println("View Boarding");
+    private void handleViewBoarding() throws IOException {
+        boardingSystem.setPriorityEntrance();
+        boardingSystem.printBoardingQueue();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("passengersList.fxml"));
+        loader.setController(this);
+        Node root = loader.load();
+
+        viewPane.getChildren().clear();
+        viewPane.getChildren().add(root);
+
+        initBoardingList();
+    }
+
+    private void initBoardingList() {
+        ObservableList<Passenger> passengers = FXCollections.observableArrayList(boardingSystem.getBoardingQueue());
+        tvPassengersList.setItems(passengers);
+        tcName.setCellValueFactory(new PropertyValueFactory<Passenger, String>("name"));
+        tcRow.setCellValueFactory(new PropertyValueFactory<Passenger, String>("row"));
+        tcSeat.setCellValueFactory(new PropertyValueFactory<Passenger, String>("seat"));
     }
 
     @FXML

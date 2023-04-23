@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+
+<TableView fx:id="tvPassengersList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+  <columns>
+    <TableColumn fx:id="tcName" minWidth="300.0" prefWidth="75.0" text="Name" />
+    <TableColumn fx:id="tcRow" minWidth="100.0" prefWidth="75.0" text="Row" />
+      <TableColumn fx:id="tcSeat" minWidth="100.0" prefWidth="75.0" text="Seat" />
+  </columns>
+</TableView>

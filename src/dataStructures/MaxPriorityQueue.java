@@ -1,5 +1,7 @@
 package dataStructures;
 
+import java.util.ArrayList;
+
 public class MaxPriorityQueue<K extends Comparable<K>, V> {
     private HeapNode<K, V>[] heap;
     private int size;
@@ -73,6 +75,10 @@ public class MaxPriorityQueue<K extends Comparable<K>, V> {
             swap(i, largest);
             maxHeapify(largest);
         }
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
     }
 
     public String toString() {
