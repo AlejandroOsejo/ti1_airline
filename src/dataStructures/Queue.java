@@ -1,7 +1,7 @@
 package dataStructures;
 
 public class Queue<T> {
-    private final T[] queue;
+    private T[] queue;
     private int size;
 
     public Queue(int size) {
@@ -50,5 +50,14 @@ public class Queue<T> {
             result += queue[i] + " ";
         }
         return result.trim();
+    }
+
+    public T[] getQueue() {
+        return queue;
+    }
+
+    public void setQueue(T[] queue) {
+        this.size = queue.length;
+        this.queue = queue;
     }
 }

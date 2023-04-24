@@ -75,14 +75,17 @@ public class BoardingSystem {
     }
 
     public void setPriorityEntrance() {
-        Queue<String> tempQueue = arrivalQueue;
-        while (!tempQueue.isEmpty()) {
-            int arrivalNum = tempQueue.size();
-            String id = tempQueue.dequeue();
+        Queue<String> tempQueue = new Queue<>(arrivalQueue.size());
+        System.out.println(tempQueue.size());
+        while (!arrivalQueue.isEmpty()) {
+            int arrivalNum = arrivalQueue.size();
+            String id = arrivalQueue.dequeue();
+            tempQueue.enqueue(id);
             Passenger passenger = passengers.get(id);
             passenger.setPriorityEntrance(arrivalNum, rows);
             boardingQueue.maxInsert(passenger.getPriority(), id);
         }
+        arrivalQueue.setQueue(tempQueue.getQueue());
     }
 
     private int determineProximity(char seat) {
@@ -104,16 +107,19 @@ public class BoardingSystem {
     }
 
     public void setPriorityExit() {
-        Queue<String> tempQueue = arrivalQueue;
+        Queue<String> tempQueue = new Queue<>(arrivalQueue.size());
+        System.out.println(tempQueue.size());
         int arrivalNum = 0;
-        while (!tempQueue.isEmpty() && arrivalNum < passengers.size()) {
+        while (!arrivalQueue.isEmpty() && arrivalNum < passengers.size()) {
             arrivalNum++;
-            String id = tempQueue.dequeue();
+            String id = arrivalQueue.dequeue();
+            tempQueue.enqueue(id);
             Passenger passenger = passengers.get(id);
             int proximity = determineProximity(passenger.getSeat());
             passenger.setPriorityExit(arrivalNum, proximity);
             exitQueue.minInsert(passenger.getPriority(), id);
         }
+        arrivalQueue.setQueue(tempQueue.getQueue());
     }
 
     public ArrayList<Passenger> getBoardingQueue() {
@@ -149,6 +155,7 @@ public class BoardingSystem {
     }
 
     public void printExitQueue() {
+        System.out.println("Entra a printExitQueue");
         System.out.println(exitQueue.toString());
     }
 }
