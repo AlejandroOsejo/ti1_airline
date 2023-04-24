@@ -1,8 +1,23 @@
 20
 6
-5
-1,John Doe,24,10,A,false,0,false
-2,Mary Smith,30,5,D,false,1000,false
-3,Mike Smith,68,5,C,true,10000,true
-4,Walter White,50,20,A,true,0,true
-5,Jesse Pinkman,25,16,B,false,0,false
+20
+1,Michael Scott,45,7,A,false,0,false
+2,Pam Beesly,30,2,C,false,500,false
+3,Jim Halpert,35,10,B,true,1000,false
+4,Dwight Schrute,42,15,A,false,0,true
+5,Angela Martin,40,8,D,true,5000,false
+6,Kevin Malone,50,20,C,false,0,true
+7,Stanley Hudson,60,10,B,true,10000,false
+8,Toby Flenderson,45,5,A,false,0,false
+9,Ryan Howard,28,3,D,true,500,false
+10,Kelly Kapoor,32,5,B,true,1000,true
+11,Meredith Palmer,55,12,A,false,0,false
+12,Creed Bratton,75,4,D,false,100,false
+13,Jan Levinson,50,8,C,true,500,false
+14,Roy Anderson,30,2,A,false,0,false
+15,Karen Filippelli,35,3,B,false,0,false
+16,David Wallace,50,20,D,true,100000,false
+17,Holly Flax,35,7,C,true,500,false
+18,Clark Green,25,1,A,false,0,true
+19,Nellie Bertram,40,10,B,true,1000,false
+20,Gabe Lewis,30,5,D,false,100,false

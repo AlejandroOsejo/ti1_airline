@@ -153,7 +153,6 @@ public class BoardingGUI {
 
         boolean isValid = listPassengers.getName().endsWith(".txt");
         if (isValid) {
-            System.out.println(listPassengers.getPath());
             boardingSystem.loadPassengers(listPassengers.getPath());
 
             btnSearch.setDisable(false);
@@ -178,7 +177,6 @@ public class BoardingGUI {
 
         boolean isValid = arrivalPassengers.getName().endsWith(".txt");
         if (isValid) {
-            System.out.println(arrivalPassengers.getPath());
             boardingSystem.addToArrivalQueueTest(arrivalPassengers.getPath());
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -203,32 +201,41 @@ public class BoardingGUI {
     @FXML
     private void handleSearchPassenger() throws IOException {
         String passengerId = tfPassengerId.getText();
-        Passenger passenger = boardingSystem.getPassenger(passengerId);
 
-        if (passenger != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("passengerInfo.fxml"));
-            loader.setController(this);
-            Node root = loader.load();
-
-            viewPane.getChildren().clear();
-            viewPane.getChildren().add(root);
-
-            Stage stage = (Stage) btnSearchPassenger.getScene().getWindow();
-            stage.close();
-
-            lbName.setText(passenger.getName());
-            lbId.setText(passenger.getId());
-            lbAge.setText(passenger.getAge() + " years old");
-            lbSeat.setText(passenger.getRow() + " " + passenger.getSeat());
-            lbIsFirstClass.setText(passenger.isFirstClass() ? "Yes" : "No");
-            lbMiles.setText(passenger.getAccumulatedMiles() + "");
-            lbNeedSpecialAtte.setText(passenger.isSpecialAttention() ? "Yes" : "No");
-        } else {
+        if (passengerId.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Passenger not found");
-            alert.setContentText("The passenger with the ID " + passengerId + " was not found");
+            alert.setHeaderText("Empty field");
+            alert.setContentText("Please enter a passenger id");
             alert.showAndWait();
+        } else {
+            Passenger passenger = boardingSystem.getPassenger(passengerId);
+
+            if (passenger != null) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("passengerInfo.fxml"));
+                loader.setController(this);
+                Node root = loader.load();
+
+                viewPane.getChildren().clear();
+                viewPane.getChildren().add(root);
+
+                Stage stage = (Stage) btnSearchPassenger.getScene().getWindow();
+                stage.close();
+
+                lbName.setText(passenger.getName());
+                lbId.setText(passenger.getId());
+                lbAge.setText(passenger.getAge() + " years old");
+                lbSeat.setText(passenger.getRow() + " " + passenger.getSeat());
+                lbIsFirstClass.setText(passenger.isFirstClass() ? "Yes" : "No");
+                lbMiles.setText(passenger.getAccumulatedMiles() + "");
+                lbNeedSpecialAtte.setText(passenger.isSpecialAttention() ? "Yes" : "No");
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Passenger not found");
+                alert.setContentText("The passenger with id " + passengerId + " was not found");
+                alert.showAndWait();
+            }
         }
     }
 
@@ -249,6 +256,8 @@ public class BoardingGUI {
         viewPane.getChildren().clear();
         viewPane.getChildren().add(root);
         root.setLayoutX(130);
+
+        boardingSystem.printBoardingQueue();
 
         initBoardingList();
     }
@@ -271,6 +280,8 @@ public class BoardingGUI {
         viewPane.getChildren().clear();
         viewPane.getChildren().add(root);
         root.setLayoutX(130);
+
+        boardingSystem.printExitQueue();
 
         initExitList();
     }

@@ -89,9 +89,7 @@ public class BoardingSystem {
         int proximity = 0;
         String seats = "ABCDEFGHIJ".substring(0, columns);
         int temp = (this.columns / 2) - 1;
-        System.out.println(seats.charAt(temp));
         int temp2 = temp + 1;
-        System.out.println(seats.charAt(temp2));
         while (temp > 0 && temp2 < this.columns) {
             if (seats.charAt(temp) == seat || seats.charAt(temp2) == seat) {
                 break;

@@ -116,8 +116,6 @@ public class Passenger {
     }
 
     public void setPriorityExit(int arrivalNum, int proximity) {
-        System.out.println("Name: " + name);
-        System.out.println("proximity: " + proximity);
         this.priority = row + arrivalNum + proximity;
     }
 

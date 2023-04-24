@@ -35,6 +35,10 @@ public class HashTable<K, V> {
         int hash = hash(key);
         while (table.get(hash) != null && !table.get(hash).getKey().equals(key)) {
             hash = (hash + 1) % size;
+
+            if (hash == hash(key)) {
+                return null;
+            }
         }
         if (table.get(hash) == null) {
             return null;
