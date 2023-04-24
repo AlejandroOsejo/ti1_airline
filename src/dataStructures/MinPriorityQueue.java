@@ -28,10 +28,17 @@ public class MinPriorityQueue<K extends Comparable<K>, V> {
         if (size == heap.length) {
             throw new RuntimeException("Heap overflow");
         }
+        heap[size] = new HeapNode<>(key, value);
         size++;
-        heap[size - 1] = new HeapNode<>(key, value);
         int i = size - 1;
-        while (i > 0 && heap[parent(i)].getKey().compareTo(heap[i].getKey()) > 0) {
+        while (i > 0 ) {
+            int parentIndex = parent(i);
+            K parentKey = heap[parentIndex].getKey();
+
+            if (key.compareTo(parentKey) >= 0) {
+                break;
+            }
+
             swap(i, parent(i));
             i = parent(i);
         }

@@ -1,7 +1,5 @@
 package dataStructures;
 
-import java.util.ArrayList;
-
 public class MaxPriorityQueue<K extends Comparable<K>, V> {
     private HeapNode<K, V>[] heap;
     private int size;
@@ -26,26 +24,21 @@ public class MaxPriorityQueue<K extends Comparable<K>, V> {
         return max;
     }
 
-/*    private void increaseKey(int i, K key, V value) {
-        if (key.compareTo(heap[i].getKey()) < 0) {
-            throw new RuntimeException("New key is smaller than current key");
-        }
-        heap[i].setKey(key);
-        heap[i].setValue(value);
-        while (i > 0 && heap[parent(i)].getKey().compareTo(heap[i].getKey()) < 0) {
-            swap(i, parent(i));
-            i = parent(i);
-        }
-    }*/
-
     public void maxInsert(K key, V value) {
         if (size == heap.length) {
             throw new RuntimeException("Heap overflow");
         }
+        heap[size] = new HeapNode<>(key, value);
         size++;
-        heap[size - 1] = new HeapNode<>(key, value);
         int i = size - 1;
-        while (i > 0 && heap[parent(i)].getKey().compareTo(heap[i].getKey()) < 0) {
+        while (i > 0 ) {
+            int parentIndex = parent(i);
+            K parentKey = heap[parentIndex].getKey();
+
+            if (key.compareTo(parentKey) <= 0) {
+                break;
+            }
+
             swap(i, parent(i));
             i = parent(i);
         }
