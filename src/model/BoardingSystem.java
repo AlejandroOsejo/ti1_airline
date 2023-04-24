@@ -2,6 +2,7 @@ package model;
 
 import dataStructures.HashTable;
 import dataStructures.MaxPriorityQueue;
+import dataStructures.MinPriorityQueue;
 import dataStructures.Queue;
 
 import java.io.*;
@@ -11,7 +12,9 @@ public class BoardingSystem {
     private HashTable<String, Passenger> passengers;
     private Queue<String> arrivalQueue;
     private MaxPriorityQueue<Integer, String> boardingQueue;
+    private MinPriorityQueue<Integer, String> exitQueue;
     private int rows;
+    private int columns;
 
     public BoardingSystem() {
 
@@ -22,6 +25,7 @@ public class BoardingSystem {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
             String line;
             this.rows = Integer.parseInt(reader.readLine());
+            this.columns = Integer.parseInt(reader.readLine());
             int numPassengers = Integer.parseInt(reader.readLine());
             passengers = new HashTable<>(numPassengers);
             while ((line = reader.readLine()) != null) {
@@ -39,6 +43,7 @@ public class BoardingSystem {
 
                 arrivalQueue = new Queue<>(passengers.size());
                 boardingQueue = new MaxPriorityQueue<>(passengers.size());
+                exitQueue = new MinPriorityQueue<>(passengers.size());
             }
             reader.close();
         } catch (IOException e) {
@@ -70,12 +75,46 @@ public class BoardingSystem {
     }
 
     public void setPriorityEntrance() {
-        while (!arrivalQueue.isEmpty()) {
-            int arrivalNum = arrivalQueue.size();
-            String id = arrivalQueue.dequeue();
+        Queue<String> tempQueue = arrivalQueue;
+        while (!tempQueue.isEmpty()) {
+            int arrivalNum = tempQueue.size();
+            String id = tempQueue.dequeue();
             Passenger passenger = passengers.get(id);
-            passenger.setPriority(arrivalNum, rows);
+            passenger.setPriorityEntrance(arrivalNum, rows);
             boardingQueue.maxInsert(passenger.getPriority(), id);
+        }
+    }
+
+    private int determineProximity(char seat) {
+        int proximity = 0;
+        String seats = "ABCDEFGHIJ".substring(0, columns);
+        int temp = (this.columns / 2) - 1;
+        System.out.println(seats.charAt(temp));
+        int temp2 = temp + 1;
+        System.out.println(seats.charAt(temp2));
+        while (temp > 0 && temp2 < this.columns) {
+            if (seats.charAt(temp) == seat || seats.charAt(temp2) == seat) {
+                break;
+            } else {
+                proximity++;
+                temp--;
+                temp2++;
+            }
+        }
+
+        return proximity;
+    }
+
+    public void setPriorityExit() {
+        Queue<String> tempQueue = arrivalQueue;
+        int arrivalNum = 0;
+        while (!tempQueue.isEmpty() && arrivalNum < passengers.size()) {
+            arrivalNum++;
+            String id = tempQueue.dequeue();
+            Passenger passenger = passengers.get(id);
+            int proximity = determineProximity(passenger.getSeat());
+            passenger.setPriorityExit(arrivalNum, proximity);
+            exitQueue.minInsert(passenger.getPriority(), id);
         }
     }
 
@@ -84,10 +123,19 @@ public class BoardingSystem {
         while (!boardingQueue.isEmpty()) {
             String id = boardingQueue.extractMax();
             Passenger passenger = passengers.get(id);
-            System.out.println(passenger.getName());
             boardingOrder.add(passenger);
         }
         return boardingOrder;
+    }
+
+    public ArrayList<Passenger> getExitQueue() {
+        ArrayList<Passenger> exitOrder = new ArrayList<>();
+        while (!exitQueue.isEmpty()) {
+            String id = exitQueue.extractMin();
+            Passenger passenger = passengers.get(id);
+            exitOrder.add(passenger);
+        }
+        return exitOrder;
     }
 
     public void printPassengers() {
@@ -100,5 +148,9 @@ public class BoardingSystem {
 
     public void printBoardingQueue() {
         System.out.println(boardingQueue.toString());
+    }
+
+    public void printExitQueue() {
+        System.out.println(exitQueue.toString());
     }
 }

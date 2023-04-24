@@ -96,7 +96,6 @@ public class BoardingGUI {
     @FXML
     private TableView<Passenger> tvPassengersList;
 
-
     private boolean isTestMode;
 
     private BoardingSystem boardingSystem;
@@ -156,7 +155,6 @@ public class BoardingGUI {
         if (isValid) {
             System.out.println(listPassengers.getPath());
             boardingSystem.loadPassengers(listPassengers.getPath());
-            System.out.println("Load");
 
             btnSearch.setDisable(false);
             btnViewBoarding.setDisable(false);
@@ -244,13 +242,13 @@ public class BoardingGUI {
     @FXML
     private void handleViewBoarding() throws IOException {
         boardingSystem.setPriorityEntrance();
-        boardingSystem.printBoardingQueue();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("passengersList.fxml"));
         loader.setController(this);
         Node root = loader.load();
 
         viewPane.getChildren().clear();
         viewPane.getChildren().add(root);
+        root.setLayoutX(130);
 
         initBoardingList();
     }
@@ -264,8 +262,25 @@ public class BoardingGUI {
     }
 
     @FXML
-    private void handleViewExit() {
-        System.out.println("View Exit");
+    private void handleViewExit() throws IOException {
+        boardingSystem.setPriorityExit();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("passengersList.fxml"));
+        loader.setController(this);
+        Node root = loader.load();
+
+        viewPane.getChildren().clear();
+        viewPane.getChildren().add(root);
+        root.setLayoutX(130);
+
+        initExitList();
+    }
+
+    private void initExitList() {
+        ObservableList<Passenger> passengers = FXCollections.observableArrayList(boardingSystem.getExitQueue());
+        tvPassengersList.setItems(passengers);
+        tcName.setCellValueFactory(new PropertyValueFactory<Passenger, String>("name"));
+        tcRow.setCellValueFactory(new PropertyValueFactory<Passenger, String>("row"));
+        tcSeat.setCellValueFactory(new PropertyValueFactory<Passenger, String>("seat"));
     }
 
 }

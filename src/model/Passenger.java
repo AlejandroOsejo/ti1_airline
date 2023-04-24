@@ -98,7 +98,7 @@ public class Passenger {
         return priority;
     }
 
-    public void setPriority(int arrivalNum, int lastRow) {
+    public void setPriorityEntrance(int arrivalNum, int lastRow) {
         if (this.isFirstClass) {
             this.priority = lastRow + 1 + arrivalNum;
             if (this.isSpecialAttention) {
@@ -113,6 +113,12 @@ public class Passenger {
         } else {
             this.priority = row + arrivalNum;
         }
+    }
+
+    public void setPriorityExit(int arrivalNum, int proximity) {
+        System.out.println("Name: " + name);
+        System.out.println("proximity: " + proximity);
+        this.priority = row + arrivalNum + proximity;
     }
 
     public String toString() {
