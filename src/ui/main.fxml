@@ -10,48 +10,48 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #212F3D;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #212F3D;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <VBox alignment="BASELINE_CENTER" prefHeight="800.0" prefWidth="230.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#handleSearch" prefHeight="44.0" prefWidth="195.0" style="-fx-background-color: #36a1ff;" text="Search passenger" textFill="WHITE">
+            <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#handleSearch" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #36a1ff;" text="Search passenger" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnViewBoarding" mnemonicParsing="false" onAction="#handleViewBoarding" prefHeight="44.0" prefWidth="195.0" style="-fx-background-color: #36a1ff;" text="View boarding list" textFill="WHITE">
+            <Button fx:id="btnViewBoarding" mnemonicParsing="false" onAction="#handleViewBoarding" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #36a1ff;" text="View boarding list" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnViewExit" mnemonicParsing="false" onAction="#handleViewExit" prefHeight="44.0" prefWidth="195.0" style="-fx-background-color: #36a1ff;" text="View exit list" textFill="WHITE">
+            <Button fx:id="btnViewExit" mnemonicParsing="false" onAction="#handleViewExit" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #36a1ff;" text="View exit list" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnLoadArrivalList" mnemonicParsing="false" onAction="#handleLoadArrival" prefHeight="44.0" prefWidth="195.0" style="-fx-background-color: #238636;" text="Load arrival list" textFill="WHITE">
+            <Button fx:id="btnLoadArrivalList" mnemonicParsing="false" onAction="#handleLoadArrival" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #238636;" text="Load arrival list" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <VBox.margin>
-                  <Insets top="450.0" />
+                  <Insets top="270.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btnLoad" mnemonicParsing="false" onAction="#handleLoad" prefHeight="44.0" prefWidth="195.0" style="-fx-background-color: #238636;" text="Load passengers" textFill="WHITE">
+            <Button fx:id="btnLoad" mnemonicParsing="false" onAction="#handleLoad" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #238636;" text="Load passengers" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <VBox.margin>
                   <Insets />
@@ -72,7 +72,7 @@
    <right>
       <Pane fx:id="viewPane" prefHeight="796.0" prefWidth="766.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="334.0" layoutY="387.0" text="Nothing yet" textFill="#464646">
+            <Label layoutX="234.0" layoutY="287.0" text="Nothing yet" textFill="#464646">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

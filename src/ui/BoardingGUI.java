@@ -85,6 +85,8 @@ public class BoardingGUI {
 
     // Passengers List
     @FXML
+    private TableColumn<Passenger, String> tcID;
+    @FXML
     private TableColumn<Passenger, String> tcName;
 
     @FXML
@@ -255,7 +257,6 @@ public class BoardingGUI {
 
         viewPane.getChildren().clear();
         viewPane.getChildren().add(root);
-        root.setLayoutX(130);
 
         boardingSystem.printBoardingQueue();
 
@@ -265,6 +266,7 @@ public class BoardingGUI {
     private void initBoardingList() {
         ObservableList<Passenger> passengers = FXCollections.observableArrayList(boardingSystem.getBoardingQueue());
         tvPassengersList.setItems(passengers);
+        tcID.setCellValueFactory(new PropertyValueFactory<Passenger, String>("id"));
         tcName.setCellValueFactory(new PropertyValueFactory<Passenger, String>("name"));
         tcRow.setCellValueFactory(new PropertyValueFactory<Passenger, String>("row"));
         tcSeat.setCellValueFactory(new PropertyValueFactory<Passenger, String>("seat"));
@@ -279,7 +281,6 @@ public class BoardingGUI {
 
         viewPane.getChildren().clear();
         viewPane.getChildren().add(root);
-        root.setLayoutX(130);
 
         boardingSystem.printExitQueue();
 
@@ -289,6 +290,7 @@ public class BoardingGUI {
     private void initExitList() {
         ObservableList<Passenger> passengers = FXCollections.observableArrayList(boardingSystem.getExitQueue());
         tvPassengersList.setItems(passengers);
+        tcID.setCellValueFactory(new PropertyValueFactory<Passenger, String>("id"));
         tcName.setCellValueFactory(new PropertyValueFactory<Passenger, String>("name"));
         tcRow.setCellValueFactory(new PropertyValueFactory<Passenger, String>("row"));
         tcSeat.setCellValueFactory(new PropertyValueFactory<Passenger, String>("seat"));
