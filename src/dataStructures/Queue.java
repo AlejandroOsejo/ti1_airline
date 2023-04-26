@@ -4,9 +4,9 @@ public class Queue<T> {
     private T[] queue;
     private int size;
 
-    public Queue(int size) {
+    public Queue(int length) {
         this.size = 0;
-        queue = (T[]) new Object[size];
+        queue = (T[]) new Object[length];
     }
 
     public void enqueue(T data) {
@@ -44,20 +44,20 @@ public class Queue<T> {
         return size;
     }
 
+    public T[] getQueue() {
+        return queue;
+    }
+
+    public void setQueue(T[] queue, int size) {
+        this.size = size;
+        this.queue = queue;
+    }
+
     public String toString() {
         String result = "";
         for (int i = 0; i < size; i++) {
             result += queue[i] + " ";
         }
         return result.trim();
-    }
-
-    public T[] getQueue() {
-        return queue;
-    }
-
-    public void setQueue(T[] queue) {
-        this.size = queue.length;
-        this.queue = queue;
     }
 }

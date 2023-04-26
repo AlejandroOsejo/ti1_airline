@@ -231,6 +231,10 @@ public class BoardingGUI {
                 lbIsFirstClass.setText(passenger.isFirstClass() ? "Yes" : "No");
                 lbMiles.setText(passenger.getAccumulatedMiles() + "");
                 lbNeedSpecialAtte.setText(passenger.isSpecialAttention() ? "Yes" : "No");
+
+                if (isTestMode) {
+                    btnCheckIn.setVisible(false);
+                }
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -258,8 +262,6 @@ public class BoardingGUI {
         viewPane.getChildren().clear();
         viewPane.getChildren().add(root);
 
-        boardingSystem.printBoardingQueue();
-
         initBoardingList();
     }
 
@@ -282,8 +284,6 @@ public class BoardingGUI {
         viewPane.getChildren().clear();
         viewPane.getChildren().add(root);
 
-        boardingSystem.printExitQueue();
-
         initExitList();
     }
 
@@ -295,5 +295,4 @@ public class BoardingGUI {
         tcRow.setCellValueFactory(new PropertyValueFactory<Passenger, String>("row"));
         tcSeat.setCellValueFactory(new PropertyValueFactory<Passenger, String>("seat"));
     }
-
 }

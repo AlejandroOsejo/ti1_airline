@@ -11,9 +11,8 @@ import java.util.ArrayList;
 public class BoardingSystem {
     private HashTable<String, Passenger> passengers;
     private Queue<String> arrivalQueue;
-    private MaxPriorityQueue<Integer, String> boardingQueue;
-    private MinPriorityQueue<Integer, String> exitQueue;
-    private int rows;
+    private MaxPriorityQueue<PriorityEntrance, String> boardingQueue;
+    private MinPriorityQueue<PriorityExit, String> exitQueue;
     private int columns;
 
     public BoardingSystem() {
@@ -24,7 +23,6 @@ public class BoardingSystem {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
             String line;
-            this.rows = Integer.parseInt(reader.readLine());
             this.columns = Integer.parseInt(reader.readLine());
             int numPassengers = Integer.parseInt(reader.readLine());
             passengers = new HashTable<>(numPassengers);
@@ -40,11 +38,10 @@ public class BoardingSystem {
                 boolean isSpecialAttention = Boolean.parseBoolean(infoPassenger[7].trim());
                 Passenger passenger = new Passenger(id, name, age, row, seat, isFirstClass, accumulatedMiles, isSpecialAttention);
                 passengers.put(id, passenger);
-
-                arrivalQueue = new Queue<>(passengers.size());
-                boardingQueue = new MaxPriorityQueue<>(passengers.size());
-                exitQueue = new MinPriorityQueue<>(passengers.size());
             }
+            arrivalQueue = new Queue<>(passengers.size());
+            boardingQueue = new MaxPriorityQueue<>(passengers.size());
+            exitQueue = new MinPriorityQueue<>(passengers.size());
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,7 +51,6 @@ public class BoardingSystem {
     public Passenger getPassenger(String id) {
         return passengers.get(id);
     }
-
 
     public void addToArrivalQueue(String id) {
         arrivalQueue.enqueue(id);
@@ -75,17 +71,16 @@ public class BoardingSystem {
     }
 
     public void setPriorityEntrance() {
-        Queue<String> tempQueue = new Queue<>(arrivalQueue.size());
-        System.out.println(tempQueue.size());
+        Queue<String> tempQueue = new Queue<>(passengers.size());
         while (!arrivalQueue.isEmpty()) {
             int arrivalNum = arrivalQueue.size();
             String id = arrivalQueue.dequeue();
             tempQueue.enqueue(id);
             Passenger passenger = passengers.get(id);
-            passenger.setPriorityEntrance(arrivalNum, rows);
-            boardingQueue.maxInsert(passenger.getPriority(), id);
+            passenger.setPriorityEntrance(arrivalNum);
+            boardingQueue.maxInsert(passenger.getPriorityEntrance(), id);
         }
-        arrivalQueue.setQueue(tempQueue.getQueue());
+        arrivalQueue.setQueue(tempQueue.getQueue(), tempQueue.size());
     }
 
     private int determineProximity(char seat) {
@@ -102,13 +97,11 @@ public class BoardingSystem {
                 temp2++;
             }
         }
-
         return proximity;
     }
 
     public void setPriorityExit() {
-        Queue<String> tempQueue = new Queue<>(arrivalQueue.size());
-        System.out.println(tempQueue.size());
+        Queue<String> tempQueue = new Queue<>(passengers.size());
         int arrivalNum = 0;
         while (!arrivalQueue.isEmpty() && arrivalNum < passengers.size()) {
             arrivalNum++;
@@ -117,9 +110,9 @@ public class BoardingSystem {
             Passenger passenger = passengers.get(id);
             int proximity = determineProximity(passenger.getSeat());
             passenger.setPriorityExit(arrivalNum, proximity);
-            exitQueue.minInsert(passenger.getPriority(), id);
+            exitQueue.minInsert(passenger.getPriorityExit(), id);
         }
-        arrivalQueue.setQueue(tempQueue.getQueue());
+        arrivalQueue.setQueue(tempQueue.getQueue(), tempQueue.size());
     }
 
     public ArrayList<Passenger> getBoardingQueue() {
@@ -140,22 +133,5 @@ public class BoardingSystem {
             exitOrder.add(passenger);
         }
         return exitOrder;
-    }
-
-    public void printPassengers() {
-        System.out.println(passengers.toString());
-    }
-
-    public void printArrivalQueue() {
-        System.out.println(arrivalQueue.toString());
-    }
-
-    public void printBoardingQueue() {
-        System.out.println(boardingQueue.toString());
-    }
-
-    public void printExitQueue() {
-        System.out.println("Entra a printExitQueue");
-        System.out.println(exitQueue.toString());
     }
 }

@@ -9,8 +9,8 @@ public class Passenger {
     private int accumulatedMiles;
     private boolean isFirstClass;
     private boolean isSpecialAttention;
-    private boolean isThirdAge;
-    private int priority;
+    private PriorityEntrance priorityEntrance;
+    private PriorityExit priorityExit;
 
     public Passenger(String id, String name, int age, int row, char seat, boolean isFirstClass, int accumulatedMiles, boolean isSpecialAttention) {
         this.id = id;
@@ -21,102 +21,54 @@ public class Passenger {
         this.isFirstClass = isFirstClass;
         this.accumulatedMiles = accumulatedMiles;
         this.isSpecialAttention = isSpecialAttention;
-        isThirdAge();
-    }
-
-    private void isThirdAge() {
-        if (age >= 65) {
-            this.isThirdAge = true;
-        }
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getAge() {
         return age;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public boolean isFirstClass() {
         return isFirstClass;
-    }
-
-    public void setFirstClass(boolean firstClass) {
-        isFirstClass = firstClass;
     }
 
     public int getRow() {
         return row;
     }
 
-    public void setRow(int row) {
-        this.row = row;
-    }
-
     public char getSeat() {
         return seat;
-    }
-
-    public void setSeat(char seat) {
-        this.seat = seat;
     }
 
     public int getAccumulatedMiles() {
         return accumulatedMiles;
     }
 
-    public void setAccumulatedMiles(int accumulatedMiles) {
-        this.accumulatedMiles = accumulatedMiles;
-    }
-
     public boolean isSpecialAttention() {
         return isSpecialAttention;
     }
 
-    public void setSpecialAttention(boolean specialAttention) {
-        isSpecialAttention = specialAttention;
+    public PriorityEntrance getPriorityEntrance() {
+        return priorityEntrance;
     }
 
-    public int getPriority() {
-        return priority;
+    public void setPriorityEntrance(int arrivalNum) {
+        this.priorityEntrance = new PriorityEntrance(age, row, arrivalNum, accumulatedMiles, isFirstClass, isSpecialAttention);
     }
 
-    public void setPriorityEntrance(int arrivalNum, int lastRow) {
-        if (this.isFirstClass) {
-            this.priority = lastRow + 1 + arrivalNum;
-            if (this.isSpecialAttention) {
-                this.priority++;
-            }
-            if (this.isThirdAge) {
-                this.priority++;
-            }
-            if (this.accumulatedMiles > 1000) {
-                this.priority++;
-            }
-        } else {
-            this.priority = row + arrivalNum;
-        }
+    public PriorityExit getPriorityExit() {
+        return priorityExit;
     }
 
     public void setPriorityExit(int arrivalNum, int proximity) {
-        this.priority = row + arrivalNum + proximity;
+        this.priorityExit = new PriorityExit(row, proximity, arrivalNum);
     }
 
     public String toString() {
