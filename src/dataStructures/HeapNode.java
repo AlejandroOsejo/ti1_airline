@@ -17,14 +17,6 @@ public class HeapNode<K extends Comparable<K>, V> implements Comparable<HeapNode
         return value;
     }
 
-    public void setKey(K key) {
-        this.key = key;
-    }
-
-    public void setValue(V value) {
-        this.value = value;
-    }
-
     @Override
     public int compareTo(HeapNode<K, V> o) {
         return this.key.compareTo(o.getKey());

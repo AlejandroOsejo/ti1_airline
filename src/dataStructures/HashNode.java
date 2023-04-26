@@ -17,10 +17,6 @@ public class HashNode<K, V> {
         return value;
     }
 
-    public void setValue(V value) {
-        this.value = value;
-    }
-
     public String toString() {
         return key.toString() + " - " + value.toString();
     }
