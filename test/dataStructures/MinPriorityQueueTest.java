@@ -39,6 +39,17 @@ class MinPriorityQueueTest {
     }
 
     @Test
+    void testMinInsertDuplicate() {
+        // Act
+        minPriorityQueue.minInsert(1, "A");
+        minPriorityQueue.minInsert(2, "B");
+        minPriorityQueue.minInsert(3, "C");
+
+        // Assert
+        assertThrows(RuntimeException.class, () -> minPriorityQueue.minInsert(3, "D"));
+    }
+
+    @Test
     void testExtractMin() {
         // Act
         minPriorityQueue.minInsert(3, "C");
@@ -53,6 +64,53 @@ class MinPriorityQueueTest {
     void testExtractMinEmpty() {
         // Assert
         assertThrows(RuntimeException.class, () -> minPriorityQueue.extractMin());
+    }
+
+    @Test
+    void testExtractMinVerifyHeap() {
+        // Act
+        minPriorityQueue.minInsert(1, "A");
+        minPriorityQueue.minInsert(2, "B");
+        minPriorityQueue.minInsert(3, "C");
+
+
+        // Assert
+        assertEquals("A", minPriorityQueue.extractMin());
+        assertEquals("B", minPriorityQueue.extractMin());
+        assertEquals("C", minPriorityQueue.extractMin());
+    }
+
+    @Test
+    void testGetMin() {
+        // Act
+        minPriorityQueue.minInsert(1, "A");
+        minPriorityQueue.minInsert(2, "B");
+        minPriorityQueue.minInsert(3, "C");
+
+        // Assert
+        assertEquals("A", minPriorityQueue.getMin());
+    }
+
+    @Test
+    void testGetMaxEmpty() {
+        // Assert
+        assertThrows(RuntimeException.class, () -> minPriorityQueue.getMin());
+    }
+
+    @Test
+    void testGetMaxVerifyHeap() {
+        // Act
+        minPriorityQueue.minInsert(1, "A");
+        minPriorityQueue.minInsert(2, "B");
+        minPriorityQueue.minInsert(3, "C");
+
+        // Assert
+        assertEquals("A", minPriorityQueue.getMin());
+        assertEquals("A", minPriorityQueue.extractMin());
+        assertEquals("B", minPriorityQueue.getMin());
+        assertEquals("B", minPriorityQueue.extractMin());
+        assertEquals("C", minPriorityQueue.getMin());
+        assertEquals("C", minPriorityQueue.extractMin());
     }
 
 }

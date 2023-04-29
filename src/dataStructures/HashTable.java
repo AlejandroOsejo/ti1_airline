@@ -8,7 +8,6 @@ public class HashTable<K, V> {
 
     public HashTable(int size) {
         this.size = size;
-        // this.table = new HNode[size];
         this.table = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
             table.add(null);

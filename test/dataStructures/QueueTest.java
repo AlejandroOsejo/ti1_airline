@@ -11,7 +11,7 @@ class QueueTest {
 
     @BeforeEach
     void setUp() {
-        queue = new Queue<>(3);
+        queue = new Queue<>(5);
     }
 
     @Test
@@ -31,9 +31,21 @@ class QueueTest {
         queue.enqueue("A");
         queue.enqueue("B");
         queue.enqueue("C");
+        queue.enqueue("D");
+        queue.enqueue("E");
 
         // Assert
-        assertThrows(IndexOutOfBoundsException.class, () -> queue.enqueue("D"));
+        assertThrows(IndexOutOfBoundsException.class, () -> queue.enqueue("F"));
+    }
+
+    @Test
+    void testEnqueueTwo() {
+        // Act
+        queue.enqueue("A");
+        queue.enqueue("B");
+
+        // Assert
+        assertEquals("A B", queue.toString());
     }
 
     @Test
@@ -56,6 +68,19 @@ class QueueTest {
     }
 
     @Test
+    void testDequeueAndEnqueue() {
+        // Act
+        queue.enqueue("A");
+        queue.enqueue("B");
+        queue.enqueue("C");
+        queue.dequeue();
+        queue.enqueue("D");
+
+        // Assert
+        assertEquals("B C D", queue.toString());
+    }
+
+    @Test
     void testPeek() {
         // Act
         queue.enqueue("A");
@@ -71,6 +96,19 @@ class QueueTest {
     void testPeekEmpty() {
         // Assert
         assertThrows(IndexOutOfBoundsException.class, () -> queue.peek());
+    }
+
+    @Test
+    void testPeekAndEnqueue() {
+        // Act
+        queue.enqueue("A");
+        queue.enqueue("B");
+        queue.enqueue("C");
+        queue.peek();
+        queue.enqueue("D");
+
+        // Assert
+        assertEquals("A B C D", queue.toString());
     }
 
 }
