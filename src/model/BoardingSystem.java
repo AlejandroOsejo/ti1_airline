@@ -52,8 +52,16 @@ public class BoardingSystem {
         return passengers.get(id);
     }
 
+    public HashTable<String, Passenger> getPassengers() {
+        return passengers;
+    }
+
     public void addToArrivalQueue(String id) {
         arrivalQueue.enqueue(id);
+    }
+
+    public Queue<String> getArrivalQueue() {
+        return arrivalQueue;
     }
 
     public void addToArrivalQueueTest(String filename) {
