@@ -4,13 +4,14 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.BoardingSystem;
 
 public class Main extends Application {
     private BoardingSystem boardingSystem;
     private BoardingGUI boardingGUI;
-    
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -29,6 +30,7 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Boarding System");
+        primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));
         primaryStage.show();
     }
 }
