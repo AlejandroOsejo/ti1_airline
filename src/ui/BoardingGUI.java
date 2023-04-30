@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
@@ -116,6 +117,7 @@ public class BoardingGUI {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Boarding System");
+        stage.getIcons().add(new Image("file:resources/images/icon.png"));
         stage.show();
 
         Stage stage2 = (Stage) btnNormal.getScene().getWindow();
@@ -135,6 +137,7 @@ public class BoardingGUI {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Boarding System");
+        stage.getIcons().add(new Image("file:resources/images/icon.png"));
         stage.show();
 
         Stage stage2 = (Stage) btnTest.getScene().getWindow();
@@ -197,6 +200,7 @@ public class BoardingGUI {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Search");
+        stage.getIcons().add(new Image("file:resources/images/icon.png"));
         stage.show();
     }
 
