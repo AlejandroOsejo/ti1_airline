@@ -92,13 +92,13 @@ class MinPriorityQueueTest {
     }
 
     @Test
-    void testGetMaxEmpty() {
+    void testGetMinEmpty() {
         // Assert
         assertThrows(RuntimeException.class, () -> minPriorityQueue.getMin());
     }
 
     @Test
-    void testGetMaxVerifyHeap() {
+    void testGetMinVerifyHeap() {
         // Act
         minPriorityQueue.minInsert(1, "A");
         minPriorityQueue.minInsert(2, "B");
